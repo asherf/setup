@@ -46,6 +46,6 @@ jobs:
     - name: Set env vars
       run: |
           echo 'PYENV_ROOT="${PYENV_ROOT:-${HOME}/.pants_pyenv}"' >> ${GITHUB_ENV}
-          echo 'PATH="${PYENV_ROOT}/versions/${PYENV_PY38_VERSION}/bin:${PATH}' >> ${GITHUB_ENV}
+          echo 'PATH="${PYENV_ROOT}/versions/${PYENV_PY38_VERSION}/bin:/usr/bin:${PATH}' >> ${GITHUB_ENV}
     - name: Run unit tests
       run: tox -e test
