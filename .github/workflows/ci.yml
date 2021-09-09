@@ -28,9 +28,9 @@ jobs:
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     name: "${{ matrix.os }} Python: ${{ matrix.python-version }}"
-    env:
-      PYENV_PY38_VERSION: "3.8.1"
-      ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
+    # env:
+      # PYENV_PY38_VERSION: "3.8.1"
+      # ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
     steps:
     - uses: actions/checkout@v2
       with:
@@ -39,14 +39,14 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Install python version
-      uses: gabrielfalcao/pyenv-action@v5
-      with:
-        default: "${{ matrix.python }}"
-        command: pip install -U pip  # upgrade pip after installing python
+    # - name: Install python version
+    #   uses: gabrielfalcao/pyenv-action@v5
+    #   with:
+    #     default: "${{ matrix.python }}"
+    #     command: pip install -U pip  # upgrade pip after installing python
     - name: Install dependencies
       run: |
-        pip install -U setuptools "tox>=3.23.0,<4" tox-gh-actions
+        pip install -U pip setuptools "tox>=3.23.0,<4" tox-gh-actions
     - name: Set env vars
       run: |
           echo 'PYENV_ROOT="${PYENV_ROOT:-${HOME}/.pants_pyenv}"' >> ${GITHUB_ENV}
