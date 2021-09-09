@@ -29,7 +29,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: "${{ matrix.os }} Python: ${{ matrix.python-version }}"
     env:
-      PYENV_PY38_VERSION: 3.8.1
+      PYENV_PY38_VERSION: "3.8.1"
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: "true"
     steps:
     - uses: actions/checkout@v2
       with:
