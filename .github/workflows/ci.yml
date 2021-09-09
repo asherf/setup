@@ -28,6 +28,8 @@ jobs:
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     name: "${{ matrix.os }} Python: ${{ matrix.python-version }}"
+    env:
+      PYENV_PY38_VERSION: 3.8.1
     steps:
     - uses: actions/checkout@v2
       with:
@@ -39,5 +41,9 @@ jobs:
     - name: Install dependencies
       run: |
         pip install -U "pip>=21.1" setuptools "tox>=3.23.0,<4" tox-gh-actions
+    - name: Set env vars
+      run: |
+          echo 'PYENV_ROOT="${PYENV_ROOT:-${HOME}/.pants_pyenv}"' >> ${GITHUB_ENV}
+          echo 'PATH="${PYENV_ROOT}/versions/${PYENV_PY38_VERSION}/bin:${PATH}' >> ${GITHUB_ENV}
     - name: Run unit tests
       run: tox -e test
