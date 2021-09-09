@@ -38,11 +38,14 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Install python version
+      uses: gabrielfalcao/pyenv-action@v5
+      with:
+        default: "${{ matrix.python }}"
+        command: pip install -U pip  # upgrade pip after installing python
     - name: Install dependencies
       run: |
-        pip install -U "pip>=21.1" setuptools "tox>=3.23.0,<4" tox-gh-actions
-        which git
-        echo $PATH
+        pip install -U setuptools "tox>=3.23.0,<4" tox-gh-actions
     - name: Set env vars
       run: |
           echo 'PYENV_ROOT="${PYENV_ROOT:-${HOME}/.pants_pyenv}"' >> ${GITHUB_ENV}
